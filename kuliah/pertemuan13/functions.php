@@ -9,14 +9,14 @@ function query($query)
 {
   $conn = koneksi();
 
-  $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
+  $result = mysqli_query($conn, $query);
 
   // jika hasilnya hanya 1 data
   if (mysqli_num_rows($result) == 1) {
-    return mysqli_fetch_assoc($result) or die(mysqli_error($conn));
+    return mysqli_fetch_assoc($result);
   }
 
-  $rows =  [];
+  $rows = [];
   while ($row = mysqli_fetch_assoc($result)) {
     $rows[] = $row;
   }
@@ -102,11 +102,9 @@ function login($data)
   $username = htmlspecialchars($data['username']);
   $password = htmlspecialchars($data['password']);
 
-  // cek dulu username
+  // cek dulu username 
   if ($user = query("SELECT * FROM user WHERE username = '$username'")) {
     // cek password
-    var_dump($user);
-    die;
     if (password_verify($password, $user['password'])) {
       // set session
       $_SESSION['login'] = true;
@@ -176,7 +174,7 @@ function registrasi($data)
   //Inser ke table user
   $query = "INSERT INTO user 
               VALUES
-              (null, '$username', '$password_baru'  )
+              (null, '$username', '$password_baru')
               ";
   mysqli_query($conn, $query) or die(mysqli_error($conn));
   return mysqli_affected_rows($conn);
