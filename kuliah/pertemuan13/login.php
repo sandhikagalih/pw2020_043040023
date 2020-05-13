@@ -1,18 +1,20 @@
 <?php
 session_start();
+require 'functions.php';
 
 if (isset($_SESSION['login'])) {
   header("Location: index.php");
   exit;
 }
 
-require 'functions.php';
 
 // ketika tombol login ditekan
 if (isset($_POST['login'])) {
   $login = login($_POST);
 }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,7 +27,7 @@ if (isset($_POST['login'])) {
 <body>
   <h3>Form Login</h3>
   <?php if (isset($login['error'])) : ?>
-    <p style="color: red; font-style: italic;"><?= $login['pesan']; ?></p>
+    <p style="color: red; font-style:italic;"><?= $login['pesan']; ?></p>
   <?php endif; ?>
   <form action="" method="POST">
     <ul>
@@ -42,10 +44,10 @@ if (isset($_POST['login'])) {
         </label>
       </li>
       <li>
-        <button type="submit" name="login">Login</button>
+        <button type="submit" name="login">Login!</button>
       </li>
       <li>
-        <a href="registrasi.php">Tambah user baru</a>
+        <a href="registrasi.php">Tambah User Baru</a>
       </li>
     </ul>
   </form>
